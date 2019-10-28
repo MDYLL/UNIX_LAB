@@ -61,13 +61,13 @@ int main(int argc , char *argv[])
 	{
 		printf("Enter message : ");
 		fgets(message,200,stdin);
-		strcat(sudo_message,message);
-		printf("input message - %s\n", sudo_message);
-		printf("len - %d\n", (int)strlen(sudo_message));
+		//strcat(sudo_message,message);
+		printf("input message - %s\n", message);
+		printf("len - %d\n", (int)strlen(message));
 		
 		
 		//Send some data
-		if( send(sock , encrypt(sudo_message) , strlen(sudo_message) , 0) < 0)
+		if( send(sock , encrypt(message) , strlen(message) , 0) < 0)
 		{
 			puts("Send failed");
 			return 1;
@@ -81,8 +81,8 @@ int main(int argc , char *argv[])
 		}
 		server_reply[strlen(server_reply)]=0;
 		memset(message,0,200);
-		memset(sudo_message,0,200);
-		strcat(sudo_message,"sudo ");
+		memset(message,0,200);
+		strcat(message,"sudo ");
 		if (server_reply[0]==0)
 			continue;
 		printf("%s", decrypt(server_reply));
